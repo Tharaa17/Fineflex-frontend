@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewFineScreen')}>
           <View style={styles.cardContent}>
             <Text style={styles.cardText}>New Fine</Text>
-            <Image source={require('../../assets/img/newfine.jpg')} style={styles.cardImage} />
+            <Image source={require('../../assets/img/newFine.png')} style={styles.cardImage} />
           </View>
           <View style={styles.button}>
             <Text style={styles.buttonText}>Add</Text>
@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('FineHistoryScreen')}>
           <View style={styles.cardContent}>
             <Text style={styles.cardText}>Fine History</Text>
-            <Image source={require('../../assets/img/fineHistory.jpg')} style={styles.cardImage} />
+            <Image source={require('../../assets/img/fineHistory.png')} style={styles.cardImage} />
           </View>
           <View style={styles.button}>
             <Text style={styles.buttonText}>View</Text>
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 40,
     paddingVertical: 10,
-    marginTop: 20,
+    marginTop: 3,
   },
   card: {
     backgroundColor: '#00C6FF',
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardImage: {
-    width: 120, // Increased width
-    height: 120, // Increased height
+    width: 140, // Increased width
+    height: 140, // Increased height
     marginRight: 10,
     marginLeft:10,
     marginBottom:-30,
