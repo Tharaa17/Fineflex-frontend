@@ -1,6 +1,6 @@
 import * as React from 'react';
 import MainConatiner from './src/screens/MainContainer';
-import  SvgExample from './src/screens/SvgExample;';
+
 
 
 function App(){
