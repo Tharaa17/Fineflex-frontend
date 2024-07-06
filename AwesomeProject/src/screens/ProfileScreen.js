@@ -1,50 +1,44 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, SafeAreaView, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ProfileScreen = () => {
+const { width } = Dimensions.get('window');
+
+const ProfileScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity>
-            <Text style={styles.backButton}>{'<'} </Text>
-          </TouchableOpacity>
-          <Text style={styles.headerText}>Profile</Text>
-        </View>
+        
         <View style={styles.profileContainer}>
-          <View style={styles.profileHeader}>
-            <Image  style={styles.profileImage} />
-            <Text style={styles.userIdText}>User Id</Text>
-          </View>
-          <View style={styles.menuContainer}>
-            <TouchableOpacity style={styles.menuItem}>
-              <Icon name="user" size={24} color="#00C6FF" />
-              <Text style={styles.menuItemText}>User ID</Text>
-              <Icon name="chevron-right" size={24} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-              <Icon name="globe" size={24} color="#00C6FF" />
-              <Text style={styles.menuItemText}>Language</Text>
-              <Icon name="chevron-right" size={24} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-              <Icon name="bar-chart" size={24} color="#00C6FF" />
-              <Text style={styles.menuItemText}>Evaluation</Text>
-              <Icon name="chevron-right" size={24} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-              <Icon name="file-text" size={24} color="#00C6FF" />
-              <Text style={styles.menuItemText}>Terms and Conditions</Text>
-              <Icon name="chevron-right" size={24} color="#000" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-              <Icon name="sign-out" size={24} color="#00C6FF" />
-              <Text style={styles.menuItemText}>Log Out</Text>
-              <Icon name="chevron-right" size={24} color="#000" />
-            </TouchableOpacity>
+          <Svg height="200" width={width} viewBox={`0 0 ${width} 80`} style={styles.svg}>
+            <Path d={`M0,0 Q${width / 2},50 ${width},0 V80 H0 Z`} fill="#fff" />
+          </Svg>
+          <View style={styles.profileContent}>
+            <Image source={require('../../assets/img/Pprofile.jpg')} style={styles.profileImage} />
+            <Text style={styles.profileText}>User Id</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.sectionItem}>
+          <Icon name="user" size={24} color="#00C6FF" />
+          <Text style={styles.sectionItemText}>User ID</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sectionItem}>
+          <Icon name="globe" size={24} color="#00C6FF" />
+          <Text style={styles.sectionItemText}>Language</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sectionItem}>
+          <Icon name="line-chart" size={24} color="#00C6FF" />
+          <Text style={styles.sectionItemText}>Evaluation</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sectionItem}>
+          <Icon name="file-text" size={24} color="#00C6FF" />
+          <Text style={styles.sectionItemText}>Terms and Conditions</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.sectionItem}>
+          <Icon name="sign-out" size={24} color="#00C6FF" />
+          <Text style={styles.sectionItemText}>Log Out</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -65,10 +59,6 @@ const styles = StyleSheet.create({
     padding: 20,
     width: '100%',
   },
-  backButton: {
-    fontSize: 30,
-    color: '#000',
-  },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -77,39 +67,44 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     alignItems: 'center',
-    width: '100%',
+    marginBottom: 0,
+    position: 'relative',
+    height:200,
+    backgroundColor:'#003366',
   },
-  profileHeader: {
-    backgroundColor: '#003366',
-    width: '100%',
+  svg: {
+    position: 'absolute',
+    top: 80,
+  },
+  profileContent: {
     alignItems: 'center',
-    paddingVertical: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    marginTop: 40, 
   },
   profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 10,
+    paddingTop:10,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    marginTop: -20, // Adjust to position the image within the curve
   },
-  userIdText: {
-    fontSize: 16,
+  profileText: {
     color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
   },
-  menuContainer: {
-    width: '100%',
-    paddingHorizontal: 20,
-  },
-  menuItem: {
+  sectionItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 15,
+    padding: 15,
+    backgroundColor: '#f9f9f9',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    marginHorizontal: 20,
+    marginVertical: 5,
+    borderRadius: 10,
   },
-  menuItemText: {
-    flex: 1,
+  sectionItemText: {
     fontSize: 16,
     color: '#000',
     marginLeft: 10,
@@ -117,6 +112,3 @@ const styles = StyleSheet.create({
 });
 
 export default ProfileScreen;
-
-
-
