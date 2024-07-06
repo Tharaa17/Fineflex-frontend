@@ -14,7 +14,7 @@ const LanguageScreen = () => {
     <View style={styles.curvedRectangle}>
          <View style={styles.buttonContainer}>
             <Text style={{
-              fontSize:22,
+              fontSize:20,
               color:'#FFFFFF',
               marginTop:10,
               marginBottom:10,
