@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
         </Svg>
       </View>
       <View style={styles.cardContainer}>
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewFineScreen')}>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('NewFine')}>
           <View style={styles.cardContent}>
             <Text style={styles.cardText}>New Fine</Text>
             <Image source={require('../../assets/img/newFine.png')} style={styles.cardImage} />

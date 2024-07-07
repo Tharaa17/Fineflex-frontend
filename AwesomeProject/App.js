@@ -1,12 +1,8 @@
-import * as React from 'react';
-import MainConatiner from './src/screens/MainContainer';
+import React from 'react';
+import AppNavigator from './src/screens/AppNavigator';
 
-
-
-function App(){
-  return(
-    <MainConatiner/>
-  );
+ function App() {
+  return <AppNavigator />;
 }
 
 export default App;
