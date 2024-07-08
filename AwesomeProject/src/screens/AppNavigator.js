@@ -3,7 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import MainContainer from './MainContainer';
 import NewFineScreen from './NewFineScreen';
-
+import NewFineScreen2 from './NewFineScreen2';
+import NewFineScreen3 from './NewFineScreen3';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,16 @@ function AppNavigator() {
           component={NewFineScreen}
           options={{ title: 'New Fine' }}
         />
-        
+        <Stack.Screen
+          name="NewFine2"
+          component={NewFineScreen2}
+          options={{ title: 'New Fine' }}
+        />
+        <Stack.Screen
+          name="NewFine3"
+          component={NewFineScreen3}
+          options={{ title: 'New Fine' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
