@@ -4,12 +4,7 @@ import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, SafeAreaVie
 const NewFineScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Text style={styles.backButton}>{'<'} </Text>
-        </TouchableOpacity>
-        <Text style={styles.headerText}>New Fine</Text>
-      </View>
+      
       <View style={styles.content}>
         <Text style={styles.label}>Licence Number</Text>
         <TextInput
@@ -17,7 +12,7 @@ const NewFineScreen = ({navigation}) => {
           placeholder="EX: B 4425013"
           placeholderTextColor="#999"
         />
-        <TouchableOpacity style={styles.searchButton}>
+        <TouchableOpacity style={styles.searchButton} onPress={() => navigation.navigate('NewFine2')}>
           <Text style={styles.searchButtonText}>Search</Text>
         </TouchableOpacity>
         <Image source={require('../../assets/img/newFineSrc.jpg')}    style={styles.image} />
