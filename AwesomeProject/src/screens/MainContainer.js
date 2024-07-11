@@ -7,18 +7,14 @@ import HomeScreen from '../../src/screens/HomeScreen';
 import SettingsScreen from '../../src/screens/SettingsScreen';
 import AlertsScreen from '../../src/screens/AlertsScreen';
 import ProfileScreen from '../../src/screens/ProfileScreen';
-import NewFineScreen from '../../src/screens/NewFineScreen';
-import NewFineScreen2 from './NewFineScreen2';
-import NewFineScreen3 from './NewFineScreen3';
+
 
 // Screen Names
 const homeName = 'Home';
 const settingsName = 'Settings';
 const alertsName = 'Alerts';
 const profileName = 'Profile';
-const newFineName = 'NewFine';
-const newFineName2  = 'NewFine2';
-const newFineName3  = 'NewFine3'
+
 
 const Tab = createBottomTabNavigator();
 
@@ -76,9 +72,7 @@ export default function MainContainer() {
       <Tab.Screen name={settingsName} component={SettingsScreen} />
       <Tab.Screen name={alertsName} component={AlertsScreen} />
       <Tab.Screen name={profileName} component={ProfileScreen} />
-      <Tab.Screen name={newFineName} component={NewFineScreen}  options={{ tabBarButton: () => null }}/>
-      <Tab.Screen name={newFineName2} component={NewFineScreen2}  options={{ tabBarButton: () => null }}/>
-      <Tab.Screen name={newFineName3} component={NewFineScreen3}  options={{ tabBarButton: () => null }}/>  
+      
 
     </Tab.Navigator>
   );

@@ -5,6 +5,8 @@ import MainContainer from './MainContainer';
 import NewFineScreen from './NewFineScreen';
 import NewFineScreen2 from './NewFineScreen2';
 import NewFineScreen3 from './NewFineScreen3';
+import NewFineScreen4 from './NewFineScreen4';
+import FineHistoryScreen from './FineHistoryScreen';
 
 const Stack = createStackNavigator();
 
@@ -31,6 +33,16 @@ function AppNavigator() {
           name="NewFine3"
           component={NewFineScreen3}
           options={{ title: 'New Fine' }}
+        />
+        <Stack.Screen
+          name="NewFine4"
+          component={NewFineScreen4}
+          options={{ title: 'New Fine' }}
+        />
+        <Stack.Screen
+          name="FineHistoryScreen"
+          component={FineHistoryScreen}
+          options={{ title: 'Fine History' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
