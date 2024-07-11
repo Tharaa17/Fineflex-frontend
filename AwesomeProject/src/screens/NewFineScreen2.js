@@ -26,7 +26,7 @@ const NewFineScreen2 = ({navigation}) => {
               <Text style={styles.historyColumnHeader}>Violation</Text>
               <Text style={styles.historyColumnHeader}>Payment</Text>
             </View>
-            <View style={styles.historyRow}>
+            <View style={styles.historyRow}  >
               <Text style={styles.historyData}>WP XA-0808</Text>
               <Text style={styles.historyData}>05/01/2022</Text>
               <Text style={styles.historyData}>No Carrying D.L</Text>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    
   },
   historyColumnHeader: {
     fontWeight: 'bold',

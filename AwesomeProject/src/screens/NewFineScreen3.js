@@ -85,7 +85,7 @@ const NewFineScreen3 = ({navigation}) => {
           <TouchableOpacity style={styles.sendButton}>
             <Text style={styles.sendButtonText}>Send The Link</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.historyButton}>
+          <TouchableOpacity style={styles.historyButton} onPress={() => navigation.navigate('NewFine4')}>
             <Text style={styles.historyButtonText}>View SMS/Email History</Text>
           </TouchableOpacity>
         </View>
@@ -131,12 +131,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 15,
+    marginTop:15,
+    marginBottom: 10,
     backgroundColor: '#fff',
   },
   violationContainer: {
     width: '100%',
     marginBottom: 20,
+    marginTop:10,
   },
   violationHeader: {
     fontSize: 16,

@@ -30,7 +30,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>Add</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('FineHistoryScreen')}>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('FineHistory')}>
           <View style={styles.cardContent}>
             <Text style={styles.cardText}>Fine History</Text>
             <Image source={require('../../assets/img/fineHistory.png')} style={styles.cardImage} />
