@@ -27,18 +27,13 @@ const FineHistoryScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity>
-            <Text style={styles.backButton}>{'<'} </Text>
-          </TouchableOpacity>
-          <Text style={styles.headerText}>History</Text>
-        </View>
+        
         <View style={styles.content}>
           <Text style={styles.todayText}>Today</Text>
           <View style={styles.progressContainer}>
             <AnimatedCircularProgress
-              size={100}
-              width={10}
+              size={200}
+              width={20}
               fill={30} // Fill percentage
               tintColor="#00C6FF"
               backgroundColor="#e0e0e0"
@@ -191,6 +186,7 @@ const styles = StyleSheet.create({
     color: '#00C6FF',
   },
   tableContainer: {
+    
     width: '100%',
     marginBottom: 20,
   },
@@ -209,6 +205,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingVertical: 10,
+    borderRadius: 10,
+    marginTop:1,
+    marginBottom:1,
   },
   tableData: {
     width: '25%',
@@ -225,10 +224,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   dateInput: {
-    width: '70%',
+    width: 150,
     height: 40,
     borderColor: '#00C6FF',
-    borderWidth: 1,
+    borderWidth: 5,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginLeft: 10,
