@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   searchButton: {
     width: '80%',
     height: 50,
-    backgroundColor: '#00C6FF',
+    backgroundColor: '#08C1CD',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',

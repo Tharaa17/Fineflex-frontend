@@ -35,7 +35,7 @@ const FineHistoryScreen = () => {
               size={200}
               width={20}
               fill={30} // Fill percentage
-              tintColor="#00C6FF"
+              tintColor="#08C1CD"
               backgroundColor="#e0e0e0"
             >
               {fill => (
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   dateInput: {
     width: 150,
     height: 40,
-    borderColor: '#00C6FF',
+    borderColor: '#08C1CD',
     borderWidth: 5,
     borderRadius: 5,
     paddingHorizontal: 10,

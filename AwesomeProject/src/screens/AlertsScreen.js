@@ -26,7 +26,7 @@ const AlertItem = ({ name, amount, time, status, avatar }) => (
       </Text>
       <Text style={styles.alertTime}>{time}</Text>
     </View>
-    <View style={[styles.statusIndicator, { backgroundColor: status === 'Received' ? '#00C6FF' : '#FFCCCC' }]} />
+    <View style={[styles.statusIndicator, { backgroundColor: status === 'Received' ? '#08C1CD' : '#FFCCCC' }]} />
   </View>
 );
 
