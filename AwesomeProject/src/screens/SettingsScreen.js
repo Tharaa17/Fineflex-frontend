@@ -13,7 +13,7 @@ const SettingsScreen = ({ navigation }) => {
         
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Icon name="user" size={24} color="#00C6FF" />
+            <Icon name="user" size={24} color="#08C1CD" />
             <Text style={styles.sectionHeaderText}>Account</Text>
           </View>
           <TouchableOpacity style={styles.sectionItem} onPress={() => navigation.navigate('EditProfile')}>
@@ -25,7 +25,7 @@ const SettingsScreen = ({ navigation }) => {
         </View>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Icon name="bell" size={24} color="#00C6FF" />
+            <Icon name="bell" size={24} color="#08C1CD" />
             <Text style={styles.sectionHeaderText}>Notification</Text>
           </View>
           <View style={styles.sectionItem}>
@@ -33,8 +33,8 @@ const SettingsScreen = ({ navigation }) => {
             <Switch
               value={isNotificationEnabled}
               onValueChange={setNotificationEnabled}
-              thumbColor={isNotificationEnabled ? "#00C6FF" : "#f4f3f4"}
-              trackColor={{ false: "#767577", true: "#00C6FF" }}
+              thumbColor={isNotificationEnabled ? "#08C1CD" : "#f4f3f4"}
+              trackColor={{ false: "#767577", true: "#08C1CD" }}
             />
           </View>
           <View style={styles.sectionItem}>
@@ -42,14 +42,14 @@ const SettingsScreen = ({ navigation }) => {
             <Switch
               value={isUpdatesEnabled}
               onValueChange={setUpdatesEnabled}
-              thumbColor={isUpdatesEnabled ? "#00C6FF" : "#f4f3f4"}
-              trackColor={{ false: "#767577", true: "#00C6FF" }}
+              thumbColor={isUpdatesEnabled ? "#08C1CD" : "#f4f3f4"}
+              trackColor={{ false: "#767577", true: "#08C1CD" }}
             />
           </View>
         </View>
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <Icon name="cog" size={24} color="#00C6FF" />
+            <Icon name="cog" size={24} color="#08C1CD" />
             <Text style={styles.sectionHeaderText}>Other</Text>
           </View>
           <View style={styles.sectionItem}>
@@ -57,8 +57,8 @@ const SettingsScreen = ({ navigation }) => {
             <Switch
               value={isDarkModeEnabled}
               onValueChange={setDarkModeEnabled}
-              thumbColor={isDarkModeEnabled ? "#00C6FF" : "#f4f3f4"}
-              trackColor={{ false: "#767577", true: "#00C6FF" }}
+              thumbColor={isDarkModeEnabled ? "#08C1CD" : "#f4f3f4"}
+              trackColor={{ false: "#767577", true: "#08C1CDF" }}
             />
           </View>
           <TouchableOpacity style={styles.sectionItem} onPress={() => navigation.navigate('Help')}>

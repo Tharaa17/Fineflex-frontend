@@ -20,23 +20,23 @@ const ProfileScreen = ({ navigation }) => {
           </View>
         </View>
         <TouchableOpacity style={styles.sectionItem}>
-          <Icon name="user" size={24} color="#00C6FF" />
+          <Icon name="user" size={24} color="#08C1CD" />
           <Text style={styles.sectionItemText}>User ID</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sectionItem}>
-          <Icon name="globe" size={24} color="#00C6FF" />
+          <Icon name="globe" size={24} color="#08C1CD" />
           <Text style={styles.sectionItemText}>Language</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sectionItem}>
-          <Icon name="line-chart" size={24} color="#00C6FF" />
+          <Icon name="line-chart" size={24} color="#08C1CD" />
           <Text style={styles.sectionItemText}>Evaluation</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sectionItem}>
-          <Icon name="file-text" size={24} color="#00C6FF" />
+          <Icon name="file-text" size={24} color="#08C1CD" />
           <Text style={styles.sectionItemText}>Terms and Conditions</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.sectionItem}>
-          <Icon name="sign-out" size={24} color="#00C6FF" />
+          <Icon name="sign-out" size={24} color="#08C1CD" />
           <Text style={styles.sectionItemText}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>

@@ -1,7 +1,9 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const LanguageScreen = () => {
+
+const LanguageScreen = ({navigation}) => {
+  
   return (
     <View style={styles.container}>
     <View style={styles.logoContainer}>
@@ -20,13 +22,13 @@ const LanguageScreen = () => {
               marginBottom:10,
             }}>Select Your language</Text>
 
-               <TouchableOpacity style={styles.button} onPress={()=> alert('Button 1 pressed')}>
+               <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('MainContainer')}>
                 <Text style={styles.buttonText}>English</Text>
                </TouchableOpacity>
-               <TouchableOpacity style={styles.button} onPress={()=> alert('Button 2 pressed')}>
+               <TouchableOpacity style={styles.button} onPress={() => alert('Button 2 pressed')}>
                 <Text style={styles.buttonText}>Sinhala</Text>
                </TouchableOpacity>
-               <TouchableOpacity style={styles.button} onPress={()=> alert('Button 3 pressed')}>
+               <TouchableOpacity style={styles.button} onPress={() => alert('Button 2 pressed')}>
                 <Text style={styles.buttonText}>Tamil</Text>
                </TouchableOpacity>
          </View>
@@ -39,6 +41,7 @@ const styles=StyleSheet.create({
     container:{
       flex:1,
       justifyContent:'flex-end',
+      backgroundColor:'#fff',
     },
   
     logoContainer:{
@@ -88,5 +91,5 @@ const styles=StyleSheet.create({
     }
   })
 
-export default LanguageScreen
+export default LanguageScreen;
 

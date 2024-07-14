@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   addButton: {
-    backgroundColor: '#00C6FF',
+    backgroundColor: '#08C1CD',
     borderRadius: 5,
     paddingVertical: 15,
     paddingHorizontal: 40,

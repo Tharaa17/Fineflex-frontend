@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
-    backgroundColor: '#00C6FF',
+    backgroundColor: '#08C1CD',
     paddingVertical: 10,
     textAlign: 'center',
     borderTopLeftRadius: 5,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   sendButton: {
     width: '100%',
     height: 50,
-    backgroundColor: '#00C6FF',
+    backgroundColor: '#08C1CD',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   historyButton: {
     width: '100%',
     height: 50,
-    backgroundColor: '#00C6FF',
+    backgroundColor: '#08C1CD',
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
