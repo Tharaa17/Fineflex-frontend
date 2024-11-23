@@ -1,40 +1,111 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  Alert,
+} from 'react-native';
 
-const NewFineScreen2 = ({navigation}) => {
+const NewFineScreen2 = ({ navigation, route }) => {
+  const { driverData } = route.params; // Receive driver data from the previous screen
+  const [fines, setFines] = useState([]); // State to store fines
+  const [loading, setLoading] = useState(true); // State for loading indicator
+
+  const driverId = driverData.driver_id; // Extract driver_id from driverData
+  console.log(driverId)
+  console.log(driverData)
+  // Fetch fines using driver_id when the component loads
+  useEffect(() => {
+    const fetchFines = async () => {
+      try {
+        const response = await fetch('http://10.0.2.2:8000/api/driver/fines', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ driver_id: driverId }), // Pass driver_id to the backend
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setFines(data.data); // Store the fines in state
+        } else {
+          const errorData = await response.json();
+          Alert.alert('Error', errorData.message || 'Failed to retrieve fines.');
+        }
+      } catch (error) {
+        Alert.alert('Error', `An error occurred: ${error.message}`);
+      } finally {
+        setLoading(false); // Stop the loading indicator
+      }
+    };
+
+    fetchFines();
+  }, [driverId]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        
         <View style={styles.profileContainer}>
           <Image source={require('../../assets/img/Dprofile.jpg')} style={styles.profileImage} />
           <View style={styles.detailContainer}>
-            <Text style={styles.detailText}><Text style={styles.boldText}>Name</Text> : W.P.Sunil Perera</Text>
-            <Text style={styles.detailText}><Text style={styles.boldText}>Age</Text> : 35</Text>
-            <Text style={styles.detailText}><Text style={styles.boldText}>Address</Text> : No 315/A , Lotus Road, Negombo</Text>
-            <Text style={styles.detailText}><Text style={styles.boldText}>Vehicle Number</Text> : WP XA-0808</Text>
-            <Text style={styles.detailText}><Text style={styles.boldText}>License Expire Date</Text> : 2026/10/12</Text>
-            <Text style={styles.detailText}><Text style={styles.boldText}>Competent to Drive</Text> : A1, A, B, G1</Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Name</Text>: {driverData.name}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Age</Text>: {driverData.age}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Address</Text>: {driverData.address}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>License Expire Date</Text>: {driverData.license_expire_date}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Competent to Drive</Text>: {driverData.competent_to_drive}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Mobile Number</Text>: {driverData.mobile_number}
+            </Text>
+            <Text style={styles.detailText}>
+              <Text style={styles.boldText}>Email</Text>: {driverData.email}
+            </Text>
           </View>
         </View>
+
         <View style={styles.historyContainer}>
           <Text style={styles.historyHeader}>History</Text>
-          <View style={styles.historyTable}>
-            <View style={styles.historyRow}>
-              <Text style={styles.historyColumnHeader}>Vehicle Number</Text>
-              <Text style={styles.historyColumnHeader}>Date</Text>
-              <Text style={styles.historyColumnHeader}>Violation</Text>
-              <Text style={styles.historyColumnHeader}>Payment</Text>
+          {loading ? (
+            <Text>Loading fines...</Text>
+          ) : fines.length > 0 ? (
+            <View style={styles.historyTable}>
+              <View style={styles.historyRow}>
+                <Text style={styles.historyColumnHeader}>Vehicle Number</Text>
+                <Text style={styles.historyColumnHeader}>Date</Text>
+                <Text style={styles.historyColumnHeader}>Violation</Text>
+                <Text style={styles.historyColumnHeader}>Payment</Text>
+              </View>
+              {fines.map((fine, index) => (
+                <View key={index} style={styles.historyRow}>
+                  <Text style={styles.historyData}>{fine.vehicle_number || 'N/A'}</Text>
+                  <Text style={styles.historyData}>{fine.date || 'N/A'}</Text>
+                  <Text style={styles.historyData}>{fine.violation_type_id || 'N/A'}</Text>
+                  <Text style={styles.historyData}>{fine.payment_status || 'Unpaid'}</Text>
+                </View>
+              ))}
             </View>
-            <View style={styles.historyRow}  >
-              <Text style={styles.historyData}>WP XA-0808</Text>
-              <Text style={styles.historyData}>05/01/2022</Text>
-              <Text style={styles.historyData}>No Carrying D.L</Text>
-              <Text style={styles.historyData}>Paid</Text>
-            </View>
-          </View>
+          ) : (
+            <Text>No fines found for this driver.</Text>
+          )}
         </View>
-        <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('NewFine3')}>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => navigation.navigate('NewFine3', { driverId })}
+        >
           <Text style={styles.addButtonText}>Add Fine</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -83,7 +154,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   detailText: {
-    
     fontSize: 18,
     color: '#000',
     marginBottom: 5,
@@ -110,7 +180,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    
   },
   historyColumnHeader: {
     fontWeight: 'bold',
@@ -136,4 +205,3 @@ const styles = StyleSheet.create({
 });
 
 export default NewFineScreen2;
-

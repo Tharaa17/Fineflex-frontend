@@ -1,7 +1,44 @@
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
+import { useUser } from './utils/UserContext';
 
 const LoginScreen = ({ navigation }) => {
+  const [policeId, setPoliceId] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useUser(); // Access login function from UserContext
+
+  const handleLogin = async () => {
+    const requestData = {
+      police_id: policeId,
+      mobile_number: phoneNumber,
+      password,
+    };
+
+    try {
+      const response = await fetch('http://10.0.2.2:8000/api/validate-police-officer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        Alert.alert('Login Successful', 'Welcome!');
+        login(responseData.data); // Save user data to context
+        navigation.navigate('LanguageScreen');
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Login Failed', errorData.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      Alert.alert('Error', `An error occurred: ${error.message}`);
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -20,19 +57,25 @@ const LoginScreen = ({ navigation }) => {
           style={styles.input}
           placeholder="Police ID"
           placeholderTextColor="#999"
+          value={policeId}
+          onChangeText={setPoliceId}
         />
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
           placeholderTextColor="#999"
+          value={phoneNumber}
+          onChangeText={setPhoneNumber}
         />
         <TextInput
           style={styles.input}
           placeholder="Password"
           placeholderTextColor="#999"
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
-        <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('LanguageScreen')}>
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.loginButtonText}>Log In</Text>
         </TouchableOpacity>
         <Text style={styles.signUpText} onPress={() => navigation.navigate('SignUpScreen')}>

@@ -1,21 +1,52 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
+import React , { useState } from 'react';
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, SafeAreaView ,Alert,} from 'react-native';
 
-const NewFineScreen = ({navigation}) => {
+const NewFineScreen = ({ navigation }) => {
+  const [licenseNumber, setLicenseNumber] = useState('');
+  const handleSearch = async () => {
+    if (!licenseNumber) {
+      Alert.alert('Error', 'Please enter a license number');
+      return;
+    }
+  
+    try {
+      const response = await fetch('http://10.0.2.2:8000/api/driver/details', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ licence_number: licenseNumber }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        Alert.alert('Success', 'Driver details retrieved successfully.');
+  
+        // Navigate to the next screen and pass driver_id along with other data
+        navigation.navigate('NewFine2', { driverData: { ...data.data, driver_id: data.data.id } });
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Error', errorData.message || 'Failed to retrieve driver details.');
+      }
+    } catch (error) {
+      Alert.alert('Error', `An error occurred: ${error.message}`);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
-      
       <View style={styles.content}>
-        <Text style={styles.label}>Licence Number</Text>
+        <Text style={styles.label}>License Number</Text>
         <TextInput
           style={styles.input}
           placeholder="EX: B 4425013"
           placeholderTextColor="#999"
+          value={licenseNumber}
+          onChangeText={setLicenseNumber}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={() => navigation.navigate('NewFine2')}>
+        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
           <Text style={styles.searchButtonText}>Search</Text>
         </TouchableOpacity>
-        <Image source={require('../../assets/img/newFineSrc.jpg')}    style={styles.image} />
+        <Image source={require('../../assets/img/newFineSrc.jpg')} style={styles.image} />
       </View>
     </SafeAreaView>
   );
