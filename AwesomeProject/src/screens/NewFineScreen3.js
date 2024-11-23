@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView, Alert } from 'react-native';
+import { useUser } from './utils/UserContext'; // Import the UserContext to access the logged-in user's data
 
-const NewFineScreen3 = ({navigation}) => {
+const NewFineScreen3 = ({ navigation, route }) => {
+  const { user } = useUser(); // Get the logged-in user's data
+  const [vehicleNumber, setVehicleNumber] = useState('');
+  const [policeStation, setPoliceStation] = useState('');
+  const [driverId, setDriverId] = useState(route.params?.driverId || ''); // Assuming driverId is passed from a previous screen
   const [selectedViolations, setSelectedViolations] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const violations = [
-    { violation: 'Contravening speed Limits', amount: 3000 },
-    { violation: 'Disobeying Road Rules', amount: 2000 },
-    { violation: 'Not wearing protective helmets', amount: 1000 },
-    { violation: 'Halting or Parking', amount: 1000 },
-    { violation: 'Not carrying D.L', amount: 1000 },
+    { id: '1', violation: 'Contravening speed Limits', amount: 3000 },
+    { id: '2', violation: 'Disobeying Road Rules', amount: 2000 },
+    { id: '3', violation: 'Not wearing protective helmets', amount: 1000 },
+    { id: '4', violation: 'Halting or Parking', amount: 1000 },
+    { id: '5', violation: 'Not carrying D.L', amount: 1000 },
   ];
 
   const handleViolationPress = (violation) => {
-    const isSelected = selectedViolations.some(item => item.violation === violation.violation);
+    const isSelected = selectedViolations.some((item) => item.id === violation.id);
     let updatedViolations;
 
     if (isSelected) {
-      updatedViolations = selectedViolations.filter(item => item.violation !== violation.violation);
+      updatedViolations = selectedViolations.filter((item) => item.id !== violation.id);
     } else {
       updatedViolations = [...selectedViolations, violation];
     }
@@ -28,20 +33,61 @@ const NewFineScreen3 = ({navigation}) => {
     setTotalAmount(total);
   };
 
+  const handleSendLink = async () => {
+    if (!vehicleNumber || !policeStation || selectedViolations.length === 0) {
+      Alert.alert('Error', 'Please fill all fields and select at least one violation.');
+      return;
+    }
+
+    const requestData = {
+      fine_id: `FINE-${Date.now()}`, // Generate a unique fine_id
+      police_id: user.id, // Logged-in user's police ID
+      driver_id: driverId,
+      vehicle_number: vehicleNumber,
+      violation_type_id: selectedViolations.map((violation) => violation.id).join(','), // Send IDs of selected violations
+      police_station: policeStation,
+    };
+    console.log(requestData)
+    try {
+      const response = await fetch('http://10.0.2.2:8000/api/fine/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        Alert.alert('Success', 'Fine saved successfully.');
+        console.log('Response Data:', data);
+        navigation.navigate('NewFine4'); // Navigate to history or another screen
+      } else {
+        const errorData = await response.json();
+        Alert.alert('Error', errorData.message || 'Failed to save the fine.');
+      }
+    } catch (error) {
+      Alert.alert('Error', `An error occurred: ${error.message}`);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        
         <View style={styles.content}>
           <TextInput
             style={styles.input}
             placeholder="Vehicle Number"
             placeholderTextColor="#999"
+            value={vehicleNumber}
+            onChangeText={setVehicleNumber}
           />
           <TextInput
             style={styles.input}
             placeholder="Police Station"
             placeholderTextColor="#999"
+            value={policeStation}
+            onChangeText={setPoliceStation}
           />
           <View style={styles.violationContainer}>
             <Text style={styles.violationHeader}>Select the Violation</Text>
@@ -53,7 +99,12 @@ const NewFineScreen3 = ({navigation}) => {
                 </View>
                 {violations.map((item, index) => (
                   <TouchableOpacity key={index} onPress={() => handleViolationPress(item)}>
-                    <View style={[styles.violationRow, selectedViolations.some(v => v.violation === item.violation) && styles.selectedViolation]}>
+                    <View
+                      style={[
+                        styles.violationRow,
+                        selectedViolations.some((v) => v.id === item.id) && styles.selectedViolation,
+                      ]}
+                    >
                       <Text style={styles.violationData}>{item.violation}</Text>
                       <Text style={styles.violationData}>{item.amount.toFixed(2)}</Text>
                     </View>
@@ -72,6 +123,8 @@ const NewFineScreen3 = ({navigation}) => {
               editable={false}
             />
           </View>
+
+
           <TextInput
             style={styles.input}
             placeholder="Driver's Phone Number"
@@ -82,7 +135,7 @@ const NewFineScreen3 = ({navigation}) => {
             placeholder="Driver's Email"
             placeholderTextColor="#999"
           />
-          <TouchableOpacity style={styles.sendButton}>
+          <TouchableOpacity style={styles.sendButton} onPress={handleSendLink}>
             <Text style={styles.sendButtonText}>Send The Link</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.historyButton} onPress={() => navigation.navigate('NewFine4')}>
@@ -131,14 +184,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginTop:15,
+    marginTop: 15,
     marginBottom: 10,
     backgroundColor: '#fff',
   },
   violationContainer: {
     width: '100%',
     marginBottom: 20,
-    marginTop:10,
+    marginTop: 10,
   },
   violationHeader: {
     fontSize: 16,
