@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333',
   },
+  cardContent: {
+    zIndex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default Dashboard;
