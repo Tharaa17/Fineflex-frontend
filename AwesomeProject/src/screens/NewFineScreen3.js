@@ -6,6 +6,7 @@ const NewFineScreen3 = ({ navigation, route }) => {
   const { user } = useUser(); // Get the logged-in user's data
   const [vehicleNumber, setVehicleNumber] = useState('');
   const [policeStation, setPoliceStation] = useState('');
+  const [email,setEmail]=useState('');
   const [driverId, setDriverId] = useState(route.params?.driverId || ''); // Assuming driverId is passed from a previous screen
   const [selectedViolations, setSelectedViolations] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -46,6 +47,7 @@ const NewFineScreen3 = ({ navigation, route }) => {
       vehicle_number: vehicleNumber,
       violation_type_id: selectedViolations.map((violation) => violation.id).join(','), // Send IDs of selected violations
       police_station: policeStation,
+      email:email,
     };
     console.log(requestData)
     try {
@@ -134,6 +136,8 @@ const NewFineScreen3 = ({ navigation, route }) => {
             style={styles.input}
             placeholder="Driver's Email"
             placeholderTextColor="#999"
+            value={email}
+            onChangeText={setEmail}
           />
           <TouchableOpacity style={styles.sendButton} onPress={handleSendLink}>
             <Text style={styles.sendButtonText}>Send The Link</Text>

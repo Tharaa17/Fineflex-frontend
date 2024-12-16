@@ -6,13 +6,14 @@ const LoginScreen = ({ navigation }) => {
   const [policeId, setPoliceId] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+  // const [email,setEmail]=useState('');
   const { login } = useUser(); // Access login function from UserContext
 
   const handleLogin = async () => {
     const requestData = {
       police_id: policeId,
       mobile_number: phoneNumber,
-      password,
+      password:password,
     };
 
     try {
