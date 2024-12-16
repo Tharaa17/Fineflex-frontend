@@ -66,6 +66,7 @@ function AppNavigator() {
           component={NewFineScreen4}
           options={{ title: 'New Fine' }}
         />
+        
         <Stack.Screen
           name="FineHistory"
           component={FineHistoryScreen}

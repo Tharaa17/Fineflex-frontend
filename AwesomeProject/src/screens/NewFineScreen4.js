@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 
+
+
+  
+
 const NewFineScreen4 = () => {
+  
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -21,6 +26,14 @@ const NewFineScreen4 = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <TouchableOpacity
+  style={styles.homeButton}
+  onPress={() => navigation.navigate('MainContainer')} // Navigate to Home
+>
+  <Text style={styles.homeButtonText}>Return to Home</Text>
+</TouchableOpacity>
+
     </SafeAreaView>
   );
 };
@@ -89,6 +102,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  homeButton: {
+    width: '90%',
+    height: 50,
+    backgroundColor: '#4CAF50',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    alignSelf: 'center',
+  },
+  homeButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
 });
 
 export default NewFineScreen4;

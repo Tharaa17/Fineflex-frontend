@@ -42,10 +42,10 @@ const SignUpScreen = ({ navigation }) => {
         navigation.navigate('LoginScreen'); // Navigate to login screen
       } else {
         const errorData = await response.json();
-        alert(`Error: ${errorData.message}`);
+        alert(`Error1: ${errorData.message}`);
       }
     } catch (error) {
-      alert(`Error: ${error.message}`);
+      alert(`Error2: ${error.message}`);
       console.log(error.message)
     }
   };
